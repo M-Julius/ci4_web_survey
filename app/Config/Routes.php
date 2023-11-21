@@ -12,3 +12,5 @@ $routes->get('/logout', 'Auth::logout');
 $routes->get('/register', 'Auth::doRegister');
 
 $routes->get('/barang', 'Barang::index');
+$routes->post('/barang', 'Barang::store');
+$routes->delete('/barang/{id}', 'Barang::delete');

@@ -26,17 +26,30 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
+                                        <th>No.</th>
+                                        <th>Nama</th>
+                                        <th>Deskripsi</th>
+                                        <th>Harga</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php foreach ($barangs as $no => $row) { ?>
                                     <tr>
-                                        <td>1</td>
-                                        <td>John Doe</td>
-                                        <td>john@example.com</td>
+                                        <td><?= $no+=1; ?></td>
+                                        <td><?= $row['nama_barang'] ?></td>
+                                        <td><?= $row['deskripsi_barang'] ?></td>
+                                        <td><?= $row['harga'] ?></td>
+                                        <td>
+                                            <a href="#" class="btn btn-warning btn-sm">
+                                                Edit
+                                            </a>
+                                            <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Hapus data ini ?')">
+                                                Hapus
+                                            </a>
+                                        </td>
                                     </tr>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -61,15 +74,15 @@
         <form action="" method="post">
             <div class="form-group">
                 <label for="name">Nama Barang</label>
-                <input class="form-control" id="name" required>
+                <input class="form-control" id="name" required name="nama_barang">
             </div>
             <div class="form-group">
                 <label for="desc">Deskripsi Barang</label>
-                <input class="form-control" id="desc" >
+                <textarea class="form-control" id="desc" name="deskripsi_barang"> </textarea>
             </div>
             <div class="form-group">
                 <label for="price">Harga Barang</label>
-                <input class="form-control" id="price" required>
+                <input class="form-control" id="price" type="number" min="1" required name="harga">
             </div>
             <center>
                 <button class="btn btn-primary">Save changes</button>
