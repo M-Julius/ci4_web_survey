@@ -9,7 +9,7 @@
             </li>
             <li class="nav-title">Master</li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= site_url('/stocks'); ?>">
+                <a class="nav-link" href="<?= site_url('/barang'); ?>">
                     <i class="nav-icon icon-drop"></i> Barang
                 </a>
             </li>
