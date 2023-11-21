@@ -42,6 +42,8 @@ class App extends BaseConfig
      * variable so that it is blank.
      */
     public string $indexPage = 'index.php';
+    public $displayErrors = true;
+
 
     /**
      * --------------------------------------------------------------------------
