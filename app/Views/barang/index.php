@@ -17,7 +17,7 @@
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <button class="btn btn-primary" 
-                                    type="button" class="btn btn-primary" data-toggle="modal" data-target="#create"
+                                    type="button" class="btn btn-primary" data-toggle="modal" data-target="#myForm"
                                     >Tambah</button>
                                 </div>
                             </div>
@@ -34,7 +34,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($barangs as $no => $row) { ?>
+                                <?php foreach ($barangs as $no => $row) { 
+                                    $id = $row['barang_id'];
+                                ?>
                                     <tr>
                                         <td><?= $no+=1; ?></td>
                                         <td><?= $row['nama_barang'] ?></td>
@@ -44,7 +46,7 @@
                                             <a href="#" class="btn btn-warning btn-sm">
                                                 Edit
                                             </a>
-                                            <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Hapus data ini ?')">
+                                            <a href="<?= site_url('/barang'); ?>/<?= $id ?>" class="btn btn-danger btn-sm" onclick="return confirm('Hapus data ini ?')">
                                                 Hapus
                                             </a>
                                         </td>
@@ -61,7 +63,7 @@
 </main>
 
 <!-- Modal -->
-<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="myForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
