@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="colors.html">
+                <a class="nav-link" href="<?= site_url('/lokasi'); ?>">
                     <i class="nav-icon icon-drop"></i> Lokasi
                 </a>
             </li>

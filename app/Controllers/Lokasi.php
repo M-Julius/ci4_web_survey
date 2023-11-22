@@ -17,13 +17,19 @@ class LokasiController extends Controller
 
     public function store()
     {
+        $id = $this->request->getPost('id');
         $data = [
             'nama_lokasi'    => $this->request->getPost('nama_lokasi'),
             'alamat_lokasi'  => $this->request->getPost('alamat_lokasi'),
         ];
 
         $model = new LokasiModel();
-        $model->insert($data);
+        
+        if ($id != null) {
+            $model->update($id, $data);
+        } else {
+            $model->insert($data);
+        }
 
         return redirect()->to('/lokasi');
     }
