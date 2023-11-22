@@ -16,6 +16,7 @@ class Barang extends BaseController
 
     public function store()
     {
+        $id = $this->request->getPost('id');
         $data = [
             'nama_barang' => $this->request->getPost('nama_barang'),
             'deskripsi_barang' => $this->request->getPost('deskripsi_barang'),
@@ -23,7 +24,12 @@ class Barang extends BaseController
         ];
 
         $model = new BarangModel();
-        $model->insert($data);
+
+        if ($id != null) {
+            $model->update($id, $data);
+        } else {
+            $model->insert($data);
+        }
 
         return redirect()->to('/barang');
     }
@@ -36,8 +42,7 @@ class Barang extends BaseController
             'harga' => $this->request->getPost('harga'),
         ];
 
-        $model = new BarangModel();
-        $model->update($id, $data);
+
 
         return redirect()->to('/barang');
     }

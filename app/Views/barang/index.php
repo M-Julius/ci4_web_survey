@@ -73,7 +73,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form action="" method="post" id="formData">
+            <input type="hidden" name="id" id="id">
             <div class="form-group">
                 <label for="name">Nama Barang</label>
                 <input class="form-control" id="name" required name="nama_barang">
@@ -99,7 +100,31 @@
 <?php echo $this->section('extra-js'); ?>
 
 <script>
-    
+    // Function to populate the form fields when Edit button is clicked
+    function fillformData(id, nama_barang, deskripsi_barang, harga) {
+        $('#formData #name').val(nama_barang);
+        $('#formData #desc').val(deskripsi_barang);
+        $('#formData #price').val(harga);
+
+        // Assuming you have an input field for the ID
+        $('#formData #id').val(id);
+    }
+
+    // Event handler for Edit button click
+    $('.btn-warning').on('click', function() {
+        // Get the data from the row
+        var row = $(this).closest('tr');
+        var id = row.find('td:eq(0)').text();
+        var nama_barang = row.find('td:eq(1)').text();
+        var deskripsi_barang = row.find('td:eq(2)').text();
+        var harga = row.find('td:eq(3)').text();
+
+        // Fill the form with the data
+        fillformData(id, nama_barang, deskripsi_barang, harga);
+
+        // Show the modal
+        $('#myForm').modal('show');
+    });
 </script>
 
 <?php echo  $this->endSection(); ?>
