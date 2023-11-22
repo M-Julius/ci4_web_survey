@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\LokasiModel;
 use CodeIgniter\Controller;
 
-class LokasiController extends Controller
+class Lokasi extends Controller
 {
     public function index()
     {

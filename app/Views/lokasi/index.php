@@ -5,7 +5,7 @@
 <main class="main">
     <div class="container-fluid">
         <div class="animated fadeIn">
-            <h4>Management Barang</h4>
+            <h4>Management Lokasi</h4>
             <div class="row">
                 <div class="col-lg-12">
                     <!-- Card Section -->
@@ -28,25 +28,23 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Nama</th>
-                                        <th>Deskripsi</th>
-                                        <th>Harga</th>
+                                        <th>Alamat</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($barangs as $no => $row) { 
-                                    $id = $row['barang_id'];
+                                <?php foreach ($lokasis as $no => $row) { 
+                                    $id = $row['lokasi_id'];
                                 ?>
                                     <tr>
                                         <td><?= $no+=1; ?></td>
-                                        <td><?= $row['nama_barang'] ?></td>
-                                        <td><?= $row['deskripsi_barang'] ?></td>
-                                        <td><?= $row['harga'] ?></td>
+                                        <td><?= $row['nama_lokasi'] ?></td>
+                                        <td><?= $row['alamat_lokasi'] ?></td>
                                         <td>
                                             <a href="#" class="btn btn-warning btn-sm">
                                                 Edit
                                             </a>
-                                            <a href="<?= site_url('/barang'); ?>/<?= $id ?>" class="btn btn-danger btn-sm" onclick="return confirm('Hapus data ini ?')">
+                                            <a href="<?= site_url('/lokasi'); ?>/<?= $id ?>" class="btn btn-danger btn-sm" onclick="return confirm('Hapus data ini ?')">
                                                 Hapus
                                             </a>
                                         </td>
@@ -76,16 +74,12 @@
         <form action="" method="post" id="formData">
             <input type="hidden" name="id" id="id">
             <div class="form-group">
-                <label for="name">Nama Barang</label>
-                <input class="form-control" id="name" required name="nama_barang">
+                <label for="name">Nama Lokasi</label>
+                <input class="form-control" id="name" required name="nama_lokasi">
             </div>
             <div class="form-group">
-                <label for="desc">Deskripsi Barang</label>
-                <textarea class="form-control" id="desc" name="deskripsi_barang"> </textarea>
-            </div>
-            <div class="form-group">
-                <label for="price">Harga Barang</label>
-                <input class="form-control" id="price" type="number" min="1" required name="harga">
+                <label for="desc">Alamat Lokasi</label>
+                <textarea class="form-control" id="desc" name="alamat_lokasi"> </textarea>
             </div>
             <center>
                 <button class="btn btn-primary">Save</button>
@@ -101,9 +95,9 @@
 
 <script>
     // Function to populate the form fields when Edit button is clicked
-    function fillformData(id, nama_barang, deskripsi_barang, harga) {
-        $('#formData #name').val(nama_barang);
-        $('#formData #desc').val(deskripsi_barang);
+    function fillformData(id, nama_lokasi, alamat_lokasi, harga) {
+        $('#formData #name').val(nama_lokasi);
+        $('#formData #desc').val(alamat_lokasi);
         $('#formData #price').val(harga);
 
         // Assuming you have an input field for the ID
@@ -115,12 +109,12 @@
         // Get the data from the row
         var row = $(this).closest('tr');
         var id = row.find('td:eq(0)').text();
-        var nama_barang = row.find('td:eq(1)').text();
-        var deskripsi_barang = row.find('td:eq(2)').text();
+        var nama_lokasi = row.find('td:eq(1)').text();
+        var alamat_lokasi = row.find('td:eq(2)').text();
         var harga = row.find('td:eq(3)').text();
 
         // Fill the form with the data
-        fillformData(id, nama_barang, deskripsi_barang, harga);
+        fillformData(id, nama_lokasi, alamat_lokasi, harga);
 
         // Show the modal
         $('#myForm').modal('show');
