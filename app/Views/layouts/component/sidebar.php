@@ -30,9 +30,8 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link nav-link-danger" href="https://coreui.io/pro/" target="_top">
-                    <i class="nav-icon icon-layers"></i> Try CoreUI
-                    <strong>PRO</strong>
+                <a class="nav-link nav-link-danger" href="<?= site_url('/logout'); ?>" target="_top">
+                    <i class="nav-icon icon-layers"></i> Logout
                 </a>
             </li>
         </ul>
