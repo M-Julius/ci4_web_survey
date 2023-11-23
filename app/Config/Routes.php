@@ -12,7 +12,8 @@ $routes->get('/', 'Home::index');
 $routes->get('/login', 'Auth::login');
 $routes->post('/login', 'Auth::doLogin');
 $routes->get('/logout', 'Auth::logout');
-$routes->get('/register', 'Auth::doRegister');
+$routes->get('/register', 'Auth::register');
+$routes->post('/register', 'Auth::doRegister');
 
 $routes->get('/barang', 'Barang::index', $authenticatedOnly);
 $routes->post('/barang', 'Barang::store', $authenticatedOnly);

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controllers;
+
+use App\Models\MarketingModel;
 use App\Models\UserModel;
 use CodeIgniter\Controller;
 
@@ -9,6 +11,15 @@ class Auth extends BaseController
     public function login()
     {
         return view("auth/login");
+    }
+
+    public function register()
+    {
+        $marketingModel = new MarketingModel();
+
+        $data['marketings'] = $marketingModel->findAll();
+
+        return view("auth/register", $data);
     }
 
     public function doLogin()
@@ -42,6 +53,32 @@ class Auth extends BaseController
 
         // Load the login view
         return view('auth/login', $data); // Change 'auth/login' to your actual view path
+    }
+
+    public function doRegister()
+    {
+        $userModel = new UserModel();
+        $rules = [
+            'marketing_id' => 'required|min_length[1]|max_length[100]',
+            'username' => 'required|min_length[5]|max_length[200]',
+            'password' => 'required|min_length[6]|max_length[200]',
+            'confPassword' => 'matches[password]'
+        ];
+
+        if ($this->validate($rules)) {
+            $data = [
+                'marketing_id' => $this->request->getPost('marketing_id'),
+                'username' => $this->request->getPost('username'),
+                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+            ];
+            $userModel->save($data);
+            return redirect()->to('/login');
+        } else {
+            $data['validation'] = $this->validator;
+
+            echo $data['validation']->listErrors();
+            return view('/register', $data);
+        }
     }
 
     public function logout()
