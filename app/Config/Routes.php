@@ -17,8 +17,12 @@ $routes->post('/register', 'Auth::doRegister');
 
 $routes->get('/barang', 'Barang::index', $authenticatedOnly);
 $routes->post('/barang', 'Barang::store', $authenticatedOnly);
-$routes->get('/barang/(:num)', 'Barang::delete/$0', $authenticatedOnly);
+$routes->get('/barang/(:num)', 'Barang::delete/$1', $authenticatedOnly);
 
 $routes->get('/lokasi', 'Lokasi::index', $authenticatedOnly);
 $routes->post('/lokasi', 'Lokasi::store', $authenticatedOnly);
-$routes->get('/lokasi/(:num)', 'Lokasi::delete/$0', $authenticatedOnly);
+$routes->get('/lokasi/(:num)', 'Lokasi::delete/$1', $authenticatedOnly);
+
+$routes->get('/marketing', 'Marketing::index', $authenticatedOnly);
+$routes->post('/marketing', 'Marketing::store', $authenticatedOnly);
+$routes->get('/marketing/(:num)', 'Marketing::delete/$1', $authenticatedOnly);
