@@ -26,3 +26,6 @@ $routes->get('/lokasi/(:num)', 'Lokasi::delete/$1', $authenticatedOnly);
 $routes->get('/marketing', 'Marketing::index', $authenticatedOnly);
 $routes->post('/marketing', 'Marketing::store', $authenticatedOnly);
 $routes->get('/marketing/(:num)', 'Marketing::delete/$1', $authenticatedOnly);
+
+$routes->get('/survey', 'Survey::index', $authenticatedOnly);
+$routes->post('/survey', 'Survey::store', $authenticatedOnly);
