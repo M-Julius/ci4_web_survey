@@ -29,3 +29,5 @@ $routes->get('/marketing/(:num)', 'Marketing::delete/$1', $authenticatedOnly);
 
 $routes->get('/survey', 'Survey::index', $authenticatedOnly);
 $routes->post('/survey', 'Survey::store', $authenticatedOnly);
+$routes->post('/export', 'Barang::export');
+$routes->get('/view_pdf', 'Barang::view_pdf', $authenticatedOnly);
