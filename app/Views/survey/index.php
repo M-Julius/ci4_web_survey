@@ -70,11 +70,22 @@
                                             <td>
                                                 <?= $row->survey_datetime ?>
                                             </td>
-
+                                            
                                         </tr>
+                                        
                                     <?php } ?>
                                 </tbody>
                             </table>
+                            <!-- button export -->
+                            <div class="container d-flex  align-items-baseline justify-content-end">
+                                <p class="mr-2">Export</p>
+                                <a href="<?php echo site_url('/view_pdf_survey') ?>" class="mr-2">PDF</a>
+                                <p class="mr-2">|</p>
+                                <!-- <a href="">Excel</a> -->
+                                <form action="<?php echo site_url('/export_survey'); ?>" method="post">
+                                    <button type="submit" class="form-submit-button">XLSX</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +93,25 @@
         </div>
     </div>
 </main>
+<style>
+    .form-submit-button {
+        border: none;
+        outline: none;
+        background: none;
+        cursor: pointer;
+        color: #20a8d8;
+        padding: 0;
+        /* text-decoration: underline; */
+        font-family: inherit;
+        font-size: inherit;
+    }
 
+    button:hover {
+        text-decoration: underline;
+        cursor: pointer;
+        color: #167495;
+    }
+</style>
 <!-- Modal -->
 <div class="modal fade" id="myForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

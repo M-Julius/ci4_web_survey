@@ -29,5 +29,15 @@ $routes->get('/marketing/(:num)', 'Marketing::delete/$1', $authenticatedOnly);
 
 $routes->get('/survey', 'Survey::index', $authenticatedOnly);
 $routes->post('/survey', 'Survey::store', $authenticatedOnly);
+
 $routes->post('/export', 'Barang::export');
 $routes->get('/view_pdf', 'Barang::view_pdf', $authenticatedOnly);
+
+$routes->get('/view_pdf_lokasi', 'Lokasi::view_pdf_lokasi', $authenticatedOnly);
+$routes->post('/export_lokasi', 'Lokasi::export');
+
+$routes->get('/view_pdf_marketing', 'Marketing::view_pdf_marketing', $authenticatedOnly);
+$routes->post('/export_marketing', 'Marketing::export');
+
+$routes->get('/view_pdf_survey', 'Survey::view_pdf_survey', $authenticatedOnly);
+$routes->post('/export_survey', 'Survey::export');

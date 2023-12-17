@@ -52,6 +52,18 @@
                                 <?php } ?>
                                 </tbody>
                             </table>
+                             <!-- button export -->
+                             <div class="container d-flex  align-items-baseline justify-content-end">
+                                <p class="mr-2">Export</p>
+                                <a href="<?php echo site_url('/view_pdf_lokasi') ?>" class="mr-2">PDF</a>
+                                <p class="mr-2">|</p>
+                                <!-- <a href="">Excel</a> -->
+                                <form action="<?php echo site_url('/export_lokasi'); ?>" method="post">
+                                    <button type="submit" class="form-submit-button">XLSX</button>
+                                </form>
+                            </div>
+                            
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +71,25 @@
         </div>
     </div>
 </main>
+<style>
+    .form-submit-button {
+        border: none;
+        outline: none;
+        background: none;
+        cursor: pointer;
+        color: #20a8d8;
+        padding: 0;
+        /* text-decoration: underline; */
+        font-family: inherit;
+        font-size: inherit;
+    }
 
+    button:hover {
+        text-decoration: underline;
+        cursor: pointer;
+        color: #167495;
+    }
+</style>
 <!-- Modal -->
 <div class="modal fade" id="myForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -95,10 +125,9 @@
 
 <script>
     // Function to populate the form fields when Edit button is clicked
-    function fillformData(id, nama_lokasi, alamat_lokasi, harga) {
+    function fillformData(id, nama_lokasi, alamat_lokasi,) {
         $('#formData #name').val(nama_lokasi);
         $('#formData #desc').val(alamat_lokasi);
-        $('#formData #price').val(harga);
 
         // Assuming you have an input field for the ID
         $('#formData #id').val(id);
@@ -111,10 +140,9 @@
         var id = row.find('td:eq(0)').text();
         var nama_lokasi = row.find('td:eq(1)').text();
         var alamat_lokasi = row.find('td:eq(2)').text();
-        var harga = row.find('td:eq(3)').text();
 
         // Fill the form with the data
-        fillformData(id, nama_lokasi, alamat_lokasi, harga);
+        fillformData(id, nama_lokasi, alamat_lokasi,);
 
         // Show the modal
         $('#myForm').modal('show');
