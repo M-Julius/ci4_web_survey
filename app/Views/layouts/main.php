@@ -16,6 +16,7 @@
   <!-- Main styles for this application-->
   <link href="<?php echo base_url('core-ui/css/style.css'); ?>" rel="stylesheet">
   <link href="<?php echo base_url('core-ui/vendors/pace-progress/css/pace.min.css'); ?>" rel="stylesheet">
+
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -33,8 +34,6 @@
 
     <!-- End of Main Content -->
 
-
-    <?php echo $this->include('layouts/component/aside-menu'); ?>
 
   </div>
   <footer class="app-footer">
@@ -56,8 +55,10 @@
   <script src="<?php echo base_url('core-ui/vendors/@coreui/coreui/js/coreui.min.js'); ?>"></script>
   <!-- Plugins and scripts required by this view-->
   <script src="<?php echo base_url('core-ui/vendors/chart.js/js/Chart.min.js'); ?>"></script>
-  <script src="<?php echo base_url('core-ui/vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js'); ?>"></script>
+  <script
+    src="<?php echo base_url('core-ui/vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js'); ?>"></script>
   <script src="<?php echo base_url('core-ui/js/main.js'); ?>"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <?php echo $this->renderSection('extra-js'); ?>
 </body>

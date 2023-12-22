@@ -44,7 +44,7 @@ class Auth extends BaseController
                 $session->set($userData);
 
                 // Redirect to the dashboard or any other page after login
-                return redirect()->to('/barang'); // Change '/barang' to your desired redirect path
+                return redirect()->to('/dashboard'); // Change '/barang' to your desired redirect path
             } else {
                 // Login failed, show an error message
                 $data['error'] = 'Invalid username or password';

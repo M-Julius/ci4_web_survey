@@ -15,6 +15,8 @@ $routes->get('/logout', 'Auth::logout');
 $routes->get('/register', 'Auth::register');
 $routes->post('/register', 'Auth::doRegister');
 
+$routes->get('/dashboard', 'Dashboard::index', $authenticatedOnly);
+
 $routes->get('/barang', 'Barang::index', $authenticatedOnly);
 $routes->post('/barang', 'Barang::store', $authenticatedOnly);
 $routes->get('/barang/(:num)', 'Barang::delete/$1', $authenticatedOnly);
