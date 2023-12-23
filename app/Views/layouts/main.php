@@ -29,7 +29,9 @@
     <!-- end of Sidebar -->
 
     <!-- Main Content -->
-    <?php echo $this->renderSection('content'); ?>
+    <div class="app-body" style="margin-top:20px;">
+      <?php echo $this->renderSection('content'); ?>
+    </div>
 
 
     <!-- End of Main Content -->
@@ -37,13 +39,9 @@
 
   </div>
   <footer class="app-footer">
-    <div>
-      <a href="https://coreui.io">CoreUI</a>
-      <span>&copy; 2018 creativeLabs.</span>
-    </div>
     <div class="ml-auto">
       <span>Powered by</span>
-      <a href="https://coreui.io">CoreUI</a>
+      <a>Kelompok 4</a>
     </div>
   </footer>
   <!-- Bootstrap and necessary plugins-->
@@ -59,6 +57,7 @@
     src="<?php echo base_url('core-ui/vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js'); ?>"></script>
   <script src="<?php echo base_url('core-ui/js/main.js'); ?>"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <?php echo $this->renderSection('extra-js'); ?>
 </body>

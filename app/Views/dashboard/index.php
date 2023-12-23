@@ -6,7 +6,12 @@
 <main class="main">
     <div class="container-fluid">
         <div class="animated fadeIn">
-            <h4>Dashboard</h4>
+            <h4>Dashboard
+                <?php
+                $session = session();
+                echo $session->get('username');
+                ?>
+            </h4>
             <div class="row">
                 <div class="col-sm-6 col-lg-3">
                     <div class="card text-white bg-primary">
