@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,20 +32,30 @@
         }
     </style>
 </head>
+
 <body>
+
     <div class="login-form">
+        <?php
+        $session = session();
+        $loginError = $session->getFlashdata('login_error');
+        if ($loginError) {
+            echo '<div class="alert alert-danger">' . $loginError . '</div>';
+        }
+        ?>
         <h2 class="text-center mb-4">Login</h2>
         <form method="post">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
+                <input type="text" class="form-control" id="username" name="username" required maxlength="50">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password" required maxlength="100">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>
+        <a href='<?php echo site_url('/register') ?>' class="btn btn-secondary btn-block" style="margin-top: 10px;">Register</a>
     </div>
 
     <!-- CoreUI JavaScript (Optional) -->
@@ -55,4 +66,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
+
 </html>

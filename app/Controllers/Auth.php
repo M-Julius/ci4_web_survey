@@ -8,6 +8,15 @@ use CodeIgniter\Controller;
 
 class Auth extends BaseController
 {
+
+    protected $marketingModel;
+    protected $userModel;
+    public function __construct()
+    {
+        $this->marketingModel = new MarketingModel();
+        $this->userModel = new UserModel();
+    }
+
     public function login()
     {
         return view("auth/login");
@@ -15,9 +24,8 @@ class Auth extends BaseController
 
     public function register()
     {
-        $marketingModel = new MarketingModel();
 
-        $data['marketings'] = $marketingModel->findAll();
+        $data['marketings'] = $this->marketingModel->findAll();
 
         return view("auth/register", $data);
     }
@@ -29,13 +37,20 @@ class Auth extends BaseController
             $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');
 
+            $session = session();
+
             // Validate login credentials (Add your own logic here)
-            $userModel = new UserModel();
-            $user = $userModel->where('username', $username)->first();
+            $marketing = $this->marketingModel->where('email', $username)->first();
+
+            if ($marketing && $marketing['marketing_id'] != null) {
+                $user = $this->userModel->where('marketing_id', $marketing['marketing_id'])->first();
+            } else {
+                $user = $this->userModel->where('username', $username)->first();
+            }
 
             if ($user && password_verify($password, $user['password'])) {
                 // Login successful, create a session
-                $session = session();
+
                 $userData = [
                     'user_id' => $user['user_id'],
                     'username' => $user['username'],
@@ -47,19 +62,21 @@ class Auth extends BaseController
                 return redirect()->to('/dashboard'); // Change '/barang' to your desired redirect path
             } else {
                 // Login failed, show an error message
-                $data['error'] = 'Invalid username or password';
+                $response['message'] = 'Periksa username/password.';
+                $response['success'] = false;
+                $session->setFlashdata('login_error', $response['message']);
             }
         }
 
         // Load the login view
-        return view('auth/login', $data); // Change 'auth/login' to your actual view path
+        return view('auth/login', $response); // Change 'auth/login' to your actual view path
     }
 
     public function doRegister()
     {
         $userModel = new UserModel();
         $rules = [
-            'marketing_id' => 'required|min_length[1]|max_length[100]',
+            'marketing_id' => 'required|min_length[1]|max_length[10]',
             'username' => 'required|min_length[5]|max_length[200]',
             'password' => 'required|min_length[6]|max_length[200]',
             'confPassword' => 'matches[password]'

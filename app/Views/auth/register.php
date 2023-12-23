@@ -39,7 +39,8 @@
         <form method="post">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
+                <input type="text" class="form-control" id="username" name="username" required maxlength="50"
+                    minLength="5">
             </div>
             <div class="form-group">
                 <label for="name">Marketing</label>
@@ -53,15 +54,27 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password" required maxlength="100"
+                    minlength="5">
             </div>
             <div class="form-group">
                 <label for="confPassword">Konfirmasi Password</label>
-                <input type="password" class="form-control" id="confPassword" name="confPassword" required>
+                <input type="password" class="form-control" id="confPassword" name="confPassword" required
+                    maxlength="100" minLength="5" oninput="checkPassword(this)">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Register</button>
         </form>
     </div>
+
+    <script>
+        function checkPassword(input) {
+            if (input.value !== document.getElementById('password').value) {
+                input.setCustomValidity('Passwords do not match');
+            } else {
+                input.setCustomValidity('');
+            }
+        }
+    </script>
 
     <!-- CoreUI JavaScript (Optional) -->
     <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@4.0.0/dist/js/coreui.bundle.min.js"></script>
