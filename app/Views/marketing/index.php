@@ -25,7 +25,7 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
+                                        <th>ID</th>
                                         <th>Nama Marketing</th>
                                         <th>Alamat Marketing</th>
                                         <th>Email</th>
@@ -39,7 +39,7 @@
                                         ?>
                                         <tr>
                                             <td>
-                                                <?= $no+1; ?>
+                                                <?= $id; ?>
                                             </td>
                                             <td>
                                                 <?= $row['nama_marketing'] ?>
@@ -57,9 +57,7 @@
                                                 <a href="#" class="btn btn-warning btn-sm">
                                                     Edit
                                                 </a>
-                                                <a href="/marketing/<?= $id ?>"
-                                                    class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Hapus data ini ?')">
+                                                <a href="#" class="btn btn-danger btn-sm" data-marketingid="<?= $id ?> ">
                                                     Hapus
                                                 </a>
                                             </td>
@@ -90,19 +88,19 @@
                     <input type="hidden" name="id" id="id">
                     <div class="form-group">
                         <label for="name">Nama Marketing</label>
-                        <input class="form-control" id="name" required name="nama_marketing">
+                        <input class="form-control" id="name" required name="nama_marketing" maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="desc">Alamat Marketing</label>
-                        <textarea class="form-control" id="desc" required name="alamat_marketing"> </textarea>
+                        <textarea class="form-control" id="desc" required name="alamat_marketing" maxlength="255"> </textarea>
                     </div>
                     <div class="form-group">
                         <label for="eml">Email</label>
-                        <input class="form-control" id="eml" required name="email"> </input>
+                        <input class="form-control" id="eml" required name="email" maxlength="50"> </input>
                     </div>
                     <div class="form-group">
                         <label for="notelp">No Telpon</label>
-                        <input class="form-control" id="notelp" required name="nomor_telepon"> </input>
+                        <input class="form-control" id="notelp" required name="nomor_telepon" maxlength="20"> </input>
                     </div>
                     <center>
                         <button class="btn btn-primary">Save</button>
@@ -144,6 +142,31 @@
 
         // Show the modal
         $('#myForm').modal('show');
+    });
+
+    $('.btn-danger').click(function () {
+        var marketingId = $(this).data('marketingid');
+        var isDelete = confirm("Apakah anda yakin akan menghapus data ini?");
+
+        if (isDelete) {
+            $.ajax({
+                url: '/marketing/' + marketingId,
+                method: 'GET',
+                success: function (response) {
+                    response = JSON.parse(response);
+                    if (response.success) {
+                        alert(response.message);
+                        location.reload(); // Refresh halaman setelah penghapusan berhasil
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                    alert('Terjadi kesalahan saat menghapus lokasi.');
+                }
+            });
+        }
     });
 </script>
 

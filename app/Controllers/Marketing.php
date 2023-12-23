@@ -3,14 +3,22 @@
 namespace App\Controllers;
 
 use App\Models\MarketingModel;
+use App\Models\SurveyModel;
 use CodeIgniter\Controller;
 
 class Marketing extends Controller
 {
+    protected $marketingModel;
+    protected $surveysModel;
+
+    public function __construct()
+    {
+        $this->marketingModel = new MarketingModel();
+        $this->surveysModel = new SurveyModel();
+    }
     public function index()
     {
-        $marketingModel = new MarketingModel();
-        $data['marketing'] = $marketingModel->findAll();
+        $data['marketing'] = $this->marketingModel->findAll();
 
         return view('marketing/index', $data);
     }
@@ -18,7 +26,6 @@ class Marketing extends Controller
     public function store()
     {
         $id = $this->request->getPost('id');
-        $marketingModel = new MarketingModel();
 
         $data = [
             'nama_marketing' => $this->request->getPost('nama_marketing'),
@@ -28,9 +35,9 @@ class Marketing extends Controller
         ];
 
         if ($id != null) {
-            $marketingModel->update($id, $data);
+            $this->marketingModel->update($id, $data);
         } else {
-            $marketingModel->insert($data);
+            $this->marketingModel->insert($data);
         }
 
         return redirect()->to('/marketing');
@@ -38,8 +45,6 @@ class Marketing extends Controller
 
     public function update($id)
     {
-        $marketingModel = new MarketingModel();
-
         $data = [
             'nama_marketing' => $this->request->getPost('nama_marketing'),
             'alamat_marketing' => $this->request->getPost('alamat_marketing'),
@@ -47,16 +52,37 @@ class Marketing extends Controller
             'email' => $this->request->getPost('email')
         ];
 
-        $marketingModel->update($id, $data);
+        $this->marketingModel->update($id, $data);
 
         return redirect()->to('/marketing');
     }
 
-    public function delete($id)
+    public function delete($id = null)
     {
-        $marketingModel = new MarketingModel();
-        $marketingModel->delete($id);
+        $result = $this->surveysModel->select('COUNT(*) as total')->where('id_marketing', $id)->findAll();
 
-        return redirect()->to('/marketing');
+        if ($result) {
+            $totalSurveys = $result[0]['total'];
+
+            if ($totalSurveys > 0) {
+                // Kirim respons ke sisi pengguna menggunakan alert Javascript
+                $response['message'] = 'Marketing masih digunakan dalam survei. Tidak dapat dihapus.';
+                $response['success'] = false;
+                echo json_encode($response);
+            } else {
+                // Lakukan penghapusan barang karena tidak ada survei yang terkait
+                $this->marketingModel->delete($id);
+
+                $response['message'] = 'Marketing berhasil dihapus.';
+                $response['success'] = true;
+                echo json_encode($response);
+
+            }
+        } else {
+            // Kesalahan saat mengecek ketergantungan survei
+            $response['message'] = 'Terjadi kesalahan saat memeriksa ketergantungan survei.';
+            $response['success'] = false;
+            echo json_encode($response);
+        }
     }
 }
