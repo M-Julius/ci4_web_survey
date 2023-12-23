@@ -25,13 +25,14 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
+                                        <th>ID</th>
                                         <th>Nama Marketing</th>
                                         <th>Nama Komoditas</th>
                                         <th>Alamat Lokasi</th>
                                         <th>Hasil Survey</th>
                                         <th>Repeat Order</th>
                                         <th>Tanggal</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,7 +41,7 @@
                                         ?>
                                         <tr>
                                             <td>
-                                                <?= $no+1 ?>
+                                                <?= $id ?>
                                             </td>
                                             <td>
                                                 <?= $row->nama_marketing ?>
@@ -70,11 +71,31 @@
                                             <td>
                                                 <?= $row->survey_datetime ?>
                                             </td>
-
+                                            <td>
+                                                <a href="#" class="btn btn-warning btn-sm">
+                                                    Edit
+                                                </a>
+                                                <a href="/survey/<?= $id ?>" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Hapus data ini ?')">
+                                                    Hapus
+                                                </a>
+                                                <a class="btn btn-success btn-sm" href="/survey/exportPDF/<?= $id ?>">PDF</a>
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class='card-footer'>
+                            <div class="row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-6 text-right">
+                                    <a class="btn btn-success btn-sm"
+                                        href="<?= base_url('survey/exportExcel') ?>">Export to Excel</a>
+                                    <a class="btn btn-danger btn-sm" href="<?= base_url('survey/exportPDF') ?>">Export
+                                        to PDF</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -128,7 +149,7 @@
                     </div>
                     <div class="form-group">
                         <label for="desc">Hasil Survey</label>
-                        <textarea class="form-control" id="desc" name="hasil_survey"> </textarea>
+                        <textarea class="form-control" id="desc" name="hasil_survey" maxlength="255"> </textarea>
                     </div>
                     <div class="form-group">
                         <label for="order">Repeat Order</label>
@@ -149,4 +170,40 @@
         </div>
     </div>
 </div>
+<?php echo $this->endSection(); ?>
+
+<?php echo $this->section('extra-js'); ?>
+
+<script>
+    // Function to populate the form fields when Edit button is clicked
+    function fillformData(id, komoditas, marketing, location, survey, order) {
+        $('#formData #komoditas').val(komoditas);
+        $('#formData #market').val(marketing);
+        $('#formData #loc').val(location);
+        $('#formData #desc').val(survey);
+        $('#formData #order').val(order);
+
+        // Assuming you have an input field for the ID
+        $('#formData #id').val(id);
+    }
+
+    // Event handler for Edit button click
+    $('.btn-warning').on('click', function () {
+        // Get the data from the row
+        var row = $(this).closest('tr');
+        var id = row.find('td:eq(0)').text().trim();
+        var komoditas = row.find('td:eq(1)').text().trim();
+        var marketing = row.find('td:eq(2)').text().trim();
+        var location = row.find('td:eq(3)').text().trim();
+        var survey = row.find('td:eq(4)').text().trim();
+        var order = row.find('td:eq(5)').text().trim();
+
+        // Fill the form with the data
+        fillformData(id, komoditas, marketing, location, survey, order);
+
+        // Show the modal
+        $('#myForm').modal('show');
+    });
+</script>
+
 <?php echo $this->endSection(); ?>

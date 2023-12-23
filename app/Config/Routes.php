@@ -31,3 +31,7 @@ $routes->get('/marketing/(:num)', 'Marketing::delete/$1', $authenticatedOnly);
 
 $routes->get('/survey', 'Survey::index', $authenticatedOnly);
 $routes->post('/survey', 'Survey::store', $authenticatedOnly);
+$routes->get('/survey/(:num)', 'Survey::delete/$1', $authenticatedOnly);
+$routes->get('/survey/exportExcel', 'Survey::exportExcel', $authenticatedOnly);
+$routes->get('/survey/exportPDF', 'Survey::exportPDF', $authenticatedOnly);
+$routes->get('/survey/exportPDF/(:num)', 'Survey::exportItemToPDF/$1', $authenticatedOnly);
